@@ -1,0 +1,17 @@
+{
+  "name": "js_fetchPhotoFromInstagram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "fetch": "node getUrl.js && node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "*",
+    "uuid": "^8.3.2"
+  }
+}
