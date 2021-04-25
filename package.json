@@ -1,10 +1,11 @@
 {
-  "name": "js_fetchPhotoFromInstagram",
+  "name": "river@js_fetchPhotoFromInstagram",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "fetch": "node getUrl.js && node index.js"
+    "start": "node app.js",
+    "fetch": "node getUrl.js && node getPhotos.js"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +13,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "cheerio": "*",
+    "puppeteer": "^9.0.0",
     "uuid": "^8.3.2"
   }
 }
