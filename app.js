@@ -42,6 +42,9 @@ const timeOutLonger = 7000;
     // start fetching photos and scroll down
     // loop
     let photoCount = 0;
+    if(!fs.existsSync('./output/photos')) {
+        fs.mkdirSync('./output/photos')
+    }
     while(true) {
         let imageElementHandlers = await page.$$('.FFVAD');
         for(const el of imageElementHandlers) {
