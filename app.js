@@ -12,6 +12,9 @@ const password = account.password;
 const typeOption = { delay: 100 };
 const timeOut = 4000;
 const timeOutLonger = 7000;
+let photoCount = 0;
+let photoCountForRefresh = 0;
+let refreshCount = 400;
 
 (async () => {
     const browser = await puppeteer.launch({ headless: false });
@@ -41,7 +44,6 @@ const timeOutLonger = 7000;
     // if you reach this point, that means you have reached the main page
     // start fetching photos and scroll down
     // loop
-    let photoCount = 0;
     if(!fs.existsSync('./output/photos')) {
         fs.mkdirSync('./output/photos')
     }
@@ -59,8 +61,10 @@ const timeOutLonger = 7000;
                 if(res.status === 200) {
                     res.data.pipe(fs.createWriteStream(`./output/photos/image_${imageName}.jpg`));
                     photoCount++;
+                    photoCountForRefresh++;
                     console.log(`done writing ${imageName}`);
                     console.log(`photo count: ${photoCount}`);
+                    console.log(`photo count until refresh: ${refreshCount - photoCountForRefresh}`);
                 }
             })
             .catch(err => console.log(err));
@@ -74,5 +78,9 @@ const timeOutLonger = 7000;
             await page.waitForTimeout(timeOut);
         }
         await page.waitForTimeout(timeOutLonger);
+        if(photoCountForRefresh > refreshCount) {
+            photoCountForRefresh = 0;
+            await page.reload();
+        }
     }
 })();
